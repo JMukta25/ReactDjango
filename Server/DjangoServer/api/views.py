@@ -18,10 +18,7 @@ def loginUser(request):
     if User.objects.filter(userName = user.get("userName")):
         valid_user = User.objects.get(userName = user.get("userName"))
         if valid_user and valid_user.passWord == user.get("passWord"):
-           
-
-            serializer = UserSerializer(data = valid_user).data
-            return JsonResponse(serializer,safe=False)
+            return Response({"userName" : user.get("userName")})
         else:
             return Response("Invalid credentials")
     else:
