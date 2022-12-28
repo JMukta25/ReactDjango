@@ -15,14 +15,10 @@ const [passWord,setPassWord]=useState("");
        headers : {"Content-Type":"application/json"},
        body:JSON.stringify(user)
    })
-   .then((response) => {
-    console.log(response);
-    
-   })
+   .then((response) => response.json())
    .then((data) => {
-    
-    
-});
+      console.log(data.userName);
+   });
     
 }
    return(
