@@ -7,7 +7,7 @@ class User(models.Model):
 
 class ticket(models.Model): 
     id = models.IntegerField(primary_key=True)
-    ticket_img = models.URLField(max_length=500)
+    ticket_image = models.URLField(max_length=500)
     ticket_name = models.CharField(max_length=400) 
     ticket_func = models.CharField(max_length=10000) 
     
