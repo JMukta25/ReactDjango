@@ -1,8 +1,7 @@
 from rest_framework.response import Response
 from rest_framework.decorators import api_view 
-from .serializers import UserSerializer
-from djangoRestApp.models import User
-from django.http import JsonResponse
+from .serializers import UserSerializer, TicketSerializer
+from djangoRestApp.models import User, ticket
 @api_view(['POST'])
 def registerUser(request):
     user = request.data 
@@ -23,3 +22,9 @@ def loginUser(request):
             return Response("Invalid credentials")
     else:
         return Response("Invalid credentials!!")
+
+@api_view(['GET']) 
+def getTicketData(request): 
+    tickets = ticket.objects.all() 
+    serializer = TicketSerializer(tickets,many = True) 
+    return Response(serializer.data) 
