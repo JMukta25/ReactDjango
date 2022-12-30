@@ -11,3 +11,10 @@ class ticket(models.Model):
     ticket_name = models.CharField(max_length=400) 
     ticket_func = models.CharField(max_length=10000) 
     
+
+class userHistory(models.Model): 
+    userName = models.ForeignKey(User,on_delete=models.CASCADE) 
+    ticket = models.ForeignKey(ticket, on_delete=models.CASCADE) 
+    text = models.CharField(max_length=500) 
+    status = models.CharField(max_length=100) 
+    id = models.AutoField(primary_key=True)
