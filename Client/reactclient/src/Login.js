@@ -1,9 +1,11 @@
-import { useState } from "react";
+import { useState} from "react";
+import {Link,useNavigate } from 'react-router-dom'
 
-const Create=()=>{
+
+const Login=()=>{
 const [userName,setUserName]=useState("");   
 const [passWord,setPassWord]=useState("");   
-
+const navigate = useNavigate();
 
 
  const handleSubmit=(e)=>{
@@ -18,6 +20,16 @@ const [passWord,setPassWord]=useState("");
    .then((response) => response.json())
    .then((data) => {
       console.log(data.userName);
+      if(data.message==="Valid user"){
+         localStorage.setItem("Username",data.userName);
+         navigate("/Home");
+      }else{
+         localStorage.setItem("Username","");
+         navigate("/Login");
+      }
+      
+      
+
    });
     
 }
@@ -45,6 +57,9 @@ required value={passWord}
 <p>{body}</p>
 <p>{author}</p> */}
 {  <button className="addbtn">Submit</button>}
+<Link to="/Create"><h3>Create Account</h3></Link>
+        
+
 
 
 </form>
@@ -53,4 +68,4 @@ required value={passWord}
 )
 
 }
-export default Create;
+export default Login;
