@@ -1,6 +1,6 @@
 from rest_framework.response import Response
 from rest_framework.decorators import api_view 
-from .serializers import UserSerializer, TicketSerializer
+from .serializers import UserSerializer, TicketSerializer, userHistorySerializer
 from djangoRestApp.models import User, ticket
 @api_view(['POST'])
 def registerUser(request):
@@ -28,3 +28,13 @@ def getTicketData(request):
     tickets = ticket.objects.all() 
     serializer = TicketSerializer(tickets,many = True) 
     return Response(serializer.data) 
+
+@api_view(['POST']) 
+def postRequest(request):
+    userAction = request.data 
+    serializer = userHistorySerializer(data = userAction) 
+    if serializer.is_valid(): 
+        serializer.save() 
+        return Response({"message":"Data inserted"}) 
+    else:
+        return Response({"message":"Invalid data"})
