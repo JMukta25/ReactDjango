@@ -11,3 +11,72 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+.navbar{
+  display: flex;
+  flex-direction: row;
+  margin-top: 3%;
+
+}
+.logo{
+  margin-left: 5%;
+  color: #FF9494;
+  font-family: Quicksand;
+}
+.links{
+  display: flex;
+  margin-left:77%;
+ 
+  /* border: 5px solid black; */
+  justify-content: center;
+  align-items: center;
+  color:#7F8487 ;
+}
+.nav-item{
+padding-left:9%;
+padding-right:9%;
+color:#7F8487 ;
+  
+}
+.nav-item a{
+ 
+  color:#7F8487 ;
+    
+  }
+.nav-item-profile{
+  padding-left:9%;
+  padding-right:9%;
+  color:#7F8487 ;
+    
+  }
+
+.note {
+  background: #fff;
+  border-radius: 7px;
+  box-shadow: 0 2px 5px #ccc;
+  padding: 10px;
+  width: 240px;
+  margin: 16px;
+  float: left;
+}
+.note h1 {
+  font-size: 1.1em;
+  margin-bottom: 6px;
+}
+.note p {
+  font-size: 1.1em;
+  margin-bottom: 10px;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+.note button {
+  position: relative;
+  float: right;
+  margin-right: 10px;
+  color: #f5ba13;
+  border: none;
+  width: 36px;
+  height: 36px;
+  cursor: pointer;
+  outline: none;
+}

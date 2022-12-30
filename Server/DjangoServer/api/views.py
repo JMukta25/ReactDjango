@@ -17,11 +17,11 @@ def loginUser(request):
     if User.objects.filter(userName = user.get("userName")):
         valid_user = User.objects.get(userName = user.get("userName"))
         if valid_user and valid_user.passWord == user.get("passWord"):
-            return Response({"userName" : user.get("userName")})
+            return Response({"userName" : user.get("userName"), "message":"Valid user"})
         else:
-            return Response("Invalid credentials")
+            return Response({"message":"Invalid user"})
     else:
-        return Response("Invalid credentials!!")
+        return Response({"message":"Invalid user"})
 
 @api_view(['GET']) 
 def getTicketData(request): 

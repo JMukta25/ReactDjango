@@ -1,8 +1,11 @@
 import { useState } from "react";
+import {Link,useNavigate } from 'react-router-dom'
+
 
 const Create=()=>{
 const [userName,setUserName]=useState("");   
-const [passWord,setPassWord]=useState("");   
+const [passWord,setPassWord]=useState("");  
+const navigate = useNavigate(); 
 
 
 
@@ -17,6 +20,8 @@ const [passWord,setPassWord]=useState("");
    })
    .then(()=>{
        console.log("new user added");
+       navigate("/");
+       
        
       
    })
