@@ -6,7 +6,7 @@ export default function apisList({apis}) {
     <div className="ApisList">
         {apis.map((item)=>(
         <div className="blog-preview" key={item.id}>
-             <Card  title={item.ticket_name} image={item.ticket_image} desc={item.ticket_func}/>
+             <Card  id={item.id}  title={item.ticket_name} image={item.ticket_image} desc={item.ticket_func}/>
     
         </div>
        ) )}
