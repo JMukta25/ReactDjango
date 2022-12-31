@@ -34,7 +34,10 @@ def postRequest(request):
     userAction = request.data 
     serializer = userHistorySerializer(data = userAction) 
     if serializer.is_valid(): 
-        serializer.save() 
-        return Response({"message":"Data inserted"}) 
+        serializer.save()
+        print("checking") 
+        return Response({"message":"Data inserted"})
+        
     else:
+        print(userAction)
         return Response({"message":"Invalid data"})
