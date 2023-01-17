@@ -5,4 +5,6 @@ urlpatterns = [
     path('loginUser/',views.loginUser),
     path('getTicketData',views.getTicketData),
     path('postRequest/',views.postRequest),
+    path('userInfo/<str:username>/',views.getUserInfo),
+    path('getTicketInfo/<int:id>/',views.getTicketInfo),
 ]
