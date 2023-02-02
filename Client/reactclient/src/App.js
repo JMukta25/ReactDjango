@@ -4,6 +4,7 @@ import Create from './Create';
 import Login from './Login';
 import Home from './Home'
 import FiAid from './FiAid';
+import Profile from './Profile'
 import {BrowserRouter as Router,Route,Routes} from 'react-router-dom'
 
 
@@ -16,6 +17,7 @@ function App() {
     <Route path="/Create" element={<Create/>} />
     <Route path="/Home" element={<Home/>} />
     <Route path="/FiAid" element={<FiAid/>} />
+    <Route path="/Profile" element={<Profile/>} />
 
   </Routes>
   </div>

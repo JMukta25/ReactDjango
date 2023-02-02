@@ -8,7 +8,7 @@ const Navbar=()=>{
         <div className="links">
             <span className="nav-item"> <Link to="/Home">Home</Link></span>
            <span className="nav-item"><Link to="/About">About</Link></span>
-           <span className="nav-item-profile"><FontAwesomeIcon icon={faUser} /> <p>{localStorage.getItem("Username")}</p></span>
+           <span className="nav-item-profile"><FontAwesomeIcon icon={faUser} /><Link to="/Profile"><p>{localStorage.getItem("Username")}</p></Link></span>
            
             
        </div>

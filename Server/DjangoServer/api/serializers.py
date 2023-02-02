@@ -13,6 +13,8 @@ class TicketSerializer(serializers.ModelSerializer):
 
 
 class userHistorySerializer(serializers.ModelSerializer): 
+    ticket_name = serializers.ReadOnlyField(source = "ticket.ticket_name")
     class Meta: 
         model = userHistory 
-        fields = '__all__'  
+        fields = ('status','ticket_name','userName','text')
+
