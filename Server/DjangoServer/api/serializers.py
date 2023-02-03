@@ -18,3 +18,7 @@ class userHistorySerializer(serializers.ModelSerializer):
         model = userHistory 
         fields = ('status','ticket_name','userName','text')
 
+class storeUserHistorySerializer(serializers.ModelSerializer): 
+    class Meta: 
+        model = userHistory 
+        fields = '__all__'

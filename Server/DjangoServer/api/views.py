@@ -1,6 +1,6 @@
 from rest_framework.response import Response
 from rest_framework.decorators import api_view 
-from .serializers import UserSerializer, TicketSerializer, userHistorySerializer
+from .serializers import UserSerializer, TicketSerializer, userHistorySerializer, storeUserHistorySerializer
 from djangoRestApp.models import User, ticket, userHistory
 @api_view(['POST'])
 def registerUser(request):
@@ -32,7 +32,7 @@ def getTicketData(request):
 @api_view(['POST']) 
 def postRequest(request):
     userAction = request.data 
-    serializer = userHistorySerializer(data = userAction) 
+    serializer = storeUserHistorySerializer(data = userAction)
     if serializer.is_valid(): 
         serializer.save()
         print("checking") 

@@ -9,7 +9,7 @@ export default function FiAid() {
         e.preventDefault();
         const userName=localStorage.getItem("Username");
         const ticket=localStorage.getItem("id");
-        const status="Rejected";
+        const status="Accepted";
         
         const requestTicket={userName,ticket,text,status};
      
