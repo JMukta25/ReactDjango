@@ -25,6 +25,7 @@ const navigate = useNavigate();
          navigate("/Home");
       }else{
          localStorage.setItem("Username","");
+         console.log("Redirecstnig to Login page");
          navigate("/Login");
       }
       
