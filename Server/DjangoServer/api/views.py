@@ -3,16 +3,16 @@ from rest_framework.decorators import api_view
 from .serializers import UserSerializer, TicketSerializer, userHistorySerializer, storeUserHistorySerializer
 from djangoRestApp.models import User, ticket, userHistory
 import pandas as pd
-import numpy as np 
-import spacy 
-import sqlite3 
+from nltk.tokenize import sent_tokenize 
+from nltk.stem import WordNetLemmatizer
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 import re 
 from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer  
 import math
-
+import sqlite3
 sa = SentimentIntensityAnalyzer() 
+lem = WordNetLemmatizer() 
 finance_words = [
     "payment",
     "income",
@@ -86,11 +86,10 @@ def equal(pat, text):
 
 def negativity(s):
     neg = 0 
-    nlp = spacy.load("en_core_web_lg")
-    doc = nlp(s)
-    for i in doc.sents:
+    doc = sent_tokenize(s) 
+    for i in doc:
         for j in var: 
-            if (equal(j,str(i)) or equal(nlp(j)[0].lemma_,str())):
+            if (equal(j,str(i)) or equal(lem.lemmatize(j,pos = 'a'),str(i)) or equal(lem.lemmatize(j,pos = 's'),str()) or equal(lem.lemmatize(j,pos = 'r'),str()) or equal(lem.lemmatize(j,pos = 'n'),str()) or equal(lem.lemmatize(j,pos = 'v'),str())):
                 neg+=sa.polarity_scores(str(i))['neg'] 
                 # print(i," ",sa.polarity_scores(str(i))['neg'])
     return neg
@@ -153,16 +152,15 @@ def getTicketData(request):
 @api_view(['POST']) 
 def postRequest(request):
     userAction = request.data 
-    conn = sqlite3.connect("D://USERS//Dell//Desktop//Web//React//Project//Server//DjangoServer//db.sqlite3")
+    conn = sqlite3.connect("D:\ABHIR\django-projects\djangoReact\ReactDjango\Server\DjangoServer\db.sqlite3")
 
 
     df_ticket = pd.read_sql_query("SELECT * FROM djangoRestApp_ticket", conn) 
-    df_userHistory=pd.read_sql_query("SELECT * FROM djangoRestApp_userhistory", conn) 
+    df_userHistory=pd.read_sql_query("SELECT * FROM djangoRestApp_userhistory", conn)  
     df_ticket.rename(columns = {"id":"ticket_id"}, inplace = True) 
     df = pd.merge(df_userHistory,df_ticket, on = "ticket_id", how = "left") 
     df = df[["text","userName_id","ticket_name","ticket_func","status","ticket_id"]]
     df.rename(columns = {"userName_id" : "userName"}, inplace = True) 
-    nlp = spacy.load("en_core_web_lg") 
     cv = CountVectorizer() 
     l= []
     for i in range(len(df)):
@@ -193,7 +191,7 @@ def postRequest(request):
     for i in range(len(df)):
         l.append(negativity(df.iloc[i]['text']))
     df['x5'] = l
-    d = {"userName" : userAction.get("userName"), "ticket_name" : ticket.objects.get(id = userAction.get("ticket_id")).ticket_name, "text":userAction.get("text"), "ticket_func" : ticket.objects.get(id = userAction.get("ticket_id")).ticket_func}
+    d = {"userName" : userAction.get("userName"), "ticket_name" : df_ticket.iloc[int(userAction.get("ticket")) - 1]['ticket_name'], "text":userAction.get("text"), "ticket_func" : df_ticket.iloc[int(userAction.get("ticket")) - 1]['ticket_func']}
     userAction['status'] = KNNClassifier(3,d,df) 
     serializer = storeUserHistorySerializer(data = userAction) 
     if serializer.is_valid(): 
